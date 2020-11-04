@@ -6,19 +6,19 @@ const Test = () => {
 
     const formSubmit = (e) => {
         e.preventDefault()
-    }
 
-    const searchText = (e) => {
-        setSearch(e.target.value)
-    }
+        const text = e.target.elements.text.value
+        setSearch(text)
 
+        e.target.elements.text.value = ''
+    }
 
     return (
         <div>
             <form onSubmit={formSubmit}>
-                <input type='text' onChange={searchText}></input>
+                <input type='text' name='text'></input>
                 <button>Search</button>
-                <Weather />
+                <Weather searchText={search} />
             </form>
         </div>
     )
