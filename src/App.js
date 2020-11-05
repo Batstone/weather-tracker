@@ -2,8 +2,6 @@ import React from 'react';
 import './App.css';
 import Test from './Search.js';
 
-
-
 const App = () => {
 
   return (

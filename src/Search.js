@@ -18,7 +18,7 @@ const Test = () => {
             <form onSubmit={formSubmit}>
                 <input type='text' name='text'></input>
                 <button>Search</button>
-                <Weather searchText={search} />
+                {search !== '' && <Weather searchText={search} />}
             </form>
         </div>
     )
