@@ -16,7 +16,6 @@ const Weather = (props) => {
     })
 
     useEffect(() => {
-
         fetch(`http://api.weatherbit.io/v2.0/current?city=${search}&key=${key}`)
             .then(res => res.json())
             .then((data) => {
@@ -26,7 +25,6 @@ const Weather = (props) => {
                 updateWeather(response)
                 updateLocation({
                     city: response.city_name,
-                    countryCode: response.country_code
                 })
             })
             .catch(err => console.log('Something went wrong'))

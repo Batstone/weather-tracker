@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Weather from './Weather.js'
 
-const Test = () => {
+const Search = () => {
     const [search, setSearch] = useState('')
 
     const formSubmit = (e) => {
@@ -24,4 +24,4 @@ const Test = () => {
     )
 }
 
-export default Test
+export default Search
