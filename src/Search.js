@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Weather from './Weather.js'
+import Coordinates from './Coordinates.js'
 
 const Search = () => {
     const [search, setSearch] = useState('')
@@ -18,7 +18,7 @@ const Search = () => {
             <form onSubmit={formSubmit}>
                 <input type='text' name='text'></input>
                 <button>Search</button>
-                {search !== '' && <Weather searchText={search} />}
+                {search !== '' && <Coordinates searchText={search} />}
             </form>
         </div>
     )

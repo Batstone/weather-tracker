@@ -2,31 +2,20 @@ import React, { useEffect, useState } from 'react'
 
 const Forecast = (props) => {
 
-    const [didSearch, updateDidSearch] = useState(false)
     const [search] = useState(props.location.city)
     const [forecast, updateForecast] = useState('')
 
-    const key = props.code
-
-    // useEffect(() => {
-    //     updateDidSearch(!didSearch)
-    // }, [])
+    const key = 'b259026e161c31f0587ed82e488b63f5'
 
     useEffect(() => {
 
-        fetch(`http://api.weatherbit.io/v2.0/forecast/daily?city=${search}&key=${key}`)
+        console.log(search)
+
+        fetch(`http://api.openweathermap.org/data/2.5/forecast/daily?q=${search}&cnt=7&appid=${key}`)
             .then(res => res.json())
             .then((data) => {
 
-                const sixteenDayForecast = data.data
-                const sevenDayForecast = []
-
-                for (let i = 0; i < 7; i++) {
-                    sevenDayForecast.push(sixteenDayForecast[i])
-                }
-
-                updateForecast(sevenDayForecast)
-
+                console.log(data)
 
             })
             .catch(err => console.log('There was an issue'))
@@ -35,21 +24,13 @@ const Forecast = (props) => {
 
 
 
-    // useEffect(() => {
+    useEffect(() => {
 
-    //     <div>
-    //         {forecast !== '' && forecast.map((day, index) => {
-    //             return (
-    //                 <div key={index}>
-    //                     <p>Max Temp: {day.pres}</p>
-    //                 </div>
-    //             )
-    //         })}
-    //     </div>
+        <div>
 
-    // })
+        </div>
 
-
+    })
 
     return (
 
