@@ -16,9 +16,14 @@ const Weather = (props) => {
     })
 
     useEffect(() => {
+
+        updateLocation('')
+
         fetch(`http://api.weatherbit.io/v2.0/current?city=${search}&key=${key}`)
             .then(res => res.json())
             .then((data) => {
+
+
                 const response = data.data[0]
                 console.log(response)
 
