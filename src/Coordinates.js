@@ -4,7 +4,7 @@ import Weather from './Weather.js'
 
 const Coordinates = (props) => {
 
-    const [search, updateSearch] = useState(props.searchText)
+    const [search] = useState(props.searchText)
     const [locationCoordinates, updateLocationCoordinates] = useState('')
 
     useEffect(() => {
@@ -21,12 +21,14 @@ const Coordinates = (props) => {
 
                 updateLocationCoordinates(geometry)
             })
+            .catch(err => console.log('something is not right with the Coordinates component')
+            )
     }, [search])
 
     return (
         <div>
-            <h1>Coordinates</h1>
-            {locationCoordinates !== '' && <Weather locationCoordinates={locationCoordinates} />}
+            <h2>{search}</h2>
+            {locationCoordinates !== '' && <Weather locationCoordinates={locationCoordinates} searchText={search} />}
         </div>
     )
 }
