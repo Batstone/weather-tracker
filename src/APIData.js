@@ -47,7 +47,6 @@ const ApiData = (props) => {
                     updateWeatherData(data)
                     updateHourlyData(data.hourly)
                     updateDailyData(data.daily)
-
                 })
         }
 
