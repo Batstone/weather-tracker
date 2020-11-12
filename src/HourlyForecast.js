@@ -3,13 +3,15 @@ import React from 'react'
 const HourlyForecast = (props) => {
 
     const hourly = props.hourlyForecast.slice(24)
+    const temp = props.temp
+
 
     console.log(hourly)
 
     return (
         <div>
             <div>
-                <h3>Hourly forecast</h3>
+                <h2>Hourly Forecast</h2>
             </div>
             {hourly.map((hour) => {
                 return (
@@ -19,7 +21,7 @@ const HourlyForecast = (props) => {
                         </div>
                         <ul>
                             <li>{hour.dt}</li>
-                            <li>{hour.temp}</li>
+                            <li>Temp: {temp(hour.temp)}</li>
                             <li>{hour.weather[0].description}</li>
                         </ul>
                     </div>

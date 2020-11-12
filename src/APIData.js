@@ -52,13 +52,22 @@ const ApiData = (props) => {
 
     }, [locationCoordinates])
 
+    const tempConverter = (temp) => {
+
+        const farenheitConversion = (((temp - 273.15) * 1.8) + 32).toFixed(0)
+
+        const farenheit = farenheitConversion.toString() + ' ' + '℉ '
+
+        return farenheit
+    }
+
 
     return (
         <div>
             <h2>{search}</h2>
-            {weatherData && <Weather weather={weatherData} />}
-            {hourlyData && <HourlyForecast hourlyForecast={hourlyData} />}
-            {dailyData && <DailyForecast dailyForecast={dailyData} />}
+            {weatherData && <Weather weather={weatherData} temp={tempConverter} />}
+            {hourlyData && <HourlyForecast hourlyForecast={hourlyData} temp={tempConverter} />}
+            {dailyData && <DailyForecast dailyForecast={dailyData} temp={tempConverter} />}
         </div>
     )
 }

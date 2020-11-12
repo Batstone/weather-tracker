@@ -4,13 +4,15 @@ import React from 'react'
 const DailyForecast = (props) => {
 
     const daily = props.dailyForecast
+    const temp = props.temp
+
 
     console.log(daily)
 
     return (
         <div>
             <div>
-                <h3>Daily forecast</h3>
+                <h2>Daily Forecast</h2>
             </div>
 
             {daily.map((day) => {
@@ -21,8 +23,8 @@ const DailyForecast = (props) => {
                         </div>
                         <ul>
                             <li>{day.dt}</li>
-                            <li>{day.temp.min}</li>
-                            <li>{day.temp.max}</li>
+                            <li>Min temp: {temp(day.temp.min)}</li>
+                            <li>Max temp: {temp(day.temp.max)}</li>
                             <li>{day.weather[0].description}</li>
                         </ul>
                     </div>
