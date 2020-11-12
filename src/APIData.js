@@ -12,9 +12,9 @@ const ApiData = (props) => {
     const [hourlyData, updateHourlyData] = useState(null)
     const [dailyData, updateDailyData] = useState(null)
 
-
-
     useEffect(() => {
+
+        updateSearch(props.searchText)
 
         const key1 = '04d384a1bafb46ecaeb07b4ab49c647c'
 
@@ -30,8 +30,7 @@ const ApiData = (props) => {
             })
             .catch(err => console.log('something is not right with the Coordinates component')
             )
-    }, [search])
-
+    }, [props.searchText])
 
     useEffect(() => {
 
