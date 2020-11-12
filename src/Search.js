@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Coordinates from './Coordinates.js'
+import APIData from './APIData.js'
 
 const Search = () => {
     const [search, setSearch] = useState('')
@@ -20,7 +20,7 @@ const Search = () => {
             <form onSubmit={formSubmit}>
                 <input type='text' name='text'></input>
                 <button>Search</button>
-                {search !== '' && <Coordinates searchText={search} />}
+                {search !== '' && <APIData searchText={search} />}
             </form>
         </div>
     )
