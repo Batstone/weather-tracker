@@ -11,6 +11,7 @@ const ApiData = (props) => {
     const [weatherData, updateWeatherData] = useState(null)
     const [hourlyData, updateHourlyData] = useState(null)
     const [dailyData, updateDailyData] = useState(null)
+    const [tempFormat, updateTempFormat] = useState('F')
 
     useEffect(() => {
 
@@ -52,20 +53,39 @@ const ApiData = (props) => {
 
     }, [locationCoordinates])
 
+    useEffect(() => {
+
+        tempConverter()
+    }, [tempFormat])
+
+
     const tempConverter = (temp) => {
 
-        const farenheitConversion = (((temp - 273.15) * 1.8) + 32).toFixed(0)
+        if (tempFormat !== 'F') {
+            const celciusConversion = temp - 273.15
 
-        const farenheit = farenheitConversion.toString() + ' ' + '℉ '
+            const celcius = celciusConversion.toString() + ' ' + '°C'
 
-        return farenheit
+            return celcius
+        } else {
+
+            const farenheitConversion = (((temp - 273.15) * 1.8) + 32).toFixed(0)
+
+            const farenheit = farenheitConversion.toString() + ' ' + '℉ '
+
+            return farenheit
+        }
     }
 
 
     return (
         <div>
             <h2>{search}</h2>
-            {weatherData && <Weather weather={weatherData} temp={tempConverter} />}
+            <div>
+                <button onClick={() => updateTempFormat('F')}>℉</button>
+                <button onClick={() => updateTempFormat('C')}>°C</button>
+            </div>
+            {weatherData && <Weather weather={weatherData} temp={tempConverter} tempFormat={tempFormat} />}
             {hourlyData && <HourlyForecast hourlyForecast={hourlyData} temp={tempConverter} />}
             {dailyData && <DailyForecast dailyForecast={dailyData} temp={tempConverter} />}
         </div>
