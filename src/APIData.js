@@ -53,39 +53,34 @@ const ApiData = (props) => {
 
     }, [locationCoordinates])
 
-    useEffect(() => {
-
-        tempConverter()
-    }, [tempFormat])
-
 
     const tempConverter = (temp) => {
 
         if (tempFormat !== 'F') {
-            const celciusConversion = temp - 273.15
-
+            const celciusConversion = (temp - 273.15).toFixed(0)
             const celcius = celciusConversion.toString() + ' ' + '°C'
-
             return celcius
+
         } else {
-
             const farenheitConversion = (((temp - 273.15) * 1.8) + 32).toFixed(0)
-
             const farenheit = farenheitConversion.toString() + ' ' + '℉ '
-
             return farenheit
         }
     }
 
+    const update = (e, value) => {
+        e.preventDefault()
+        updateTempFormat(value)
+    }
 
     return (
         <div>
             <h2>{search}</h2>
             <div>
-                <button onClick={() => updateTempFormat('F')}>℉</button>
-                <button onClick={() => updateTempFormat('C')}>°C</button>
+                <button onClick={(e) => update(e, 'F')}>℉</button>
+                <button onClick={(e) => update(e, 'C')}>°C</button>
             </div>
-            {weatherData && <Weather weather={weatherData} temp={tempConverter} tempFormat={tempFormat} />}
+            {weatherData && <Weather weather={weatherData} temp={tempConverter} />}
             {hourlyData && <HourlyForecast hourlyForecast={hourlyData} temp={tempConverter} />}
             {dailyData && <DailyForecast dailyForecast={dailyData} temp={tempConverter} />}
         </div>
