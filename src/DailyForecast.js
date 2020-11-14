@@ -1,10 +1,13 @@
-import React from 'react'
+import React from 'react';
+import moment from 'moment';
 
 
 const DailyForecast = (props) => {
 
     const daily = props.dailyForecast
     const temp = props.temp
+
+
 
 
     console.log(daily)
@@ -16,14 +19,15 @@ const DailyForecast = (props) => {
             </div>
 
             {daily.map((day) => {
+                const time = moment.unix(day.dt).format('MMM DD');
                 return (
                     <div key={day.dt}>
                         <div>
                             <img src={`http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`}></img>
                         </div>
                         <ul>
-                            <li>{day.dt}</li>
-                            <li>Min temp: {temp(day.temp.min)}</li>
+                            <li>{time}</li>
+                            <li>Min temp: { }</li>
                             <li>Max temp: {temp(day.temp.max)}</li>
                             <li>{day.weather[0].description}</li>
                         </ul>

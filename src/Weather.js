@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import moment from 'moment';
 
 const Weather = (props) => {
 
@@ -17,7 +18,7 @@ const Weather = (props) => {
                 <div>
                     <ul>
                         <li>Current temp: {temp(props.weather.current.temp)} </li>
-                        <li>Feels like: {props.weather.current.feels_like}</li>
+                        <li>Feels like: {temp(props.weather.current.feels_like)}</li>
                         <li>{props.weather.current.weather[0].description}</li>
                     </ul>
                 </div>

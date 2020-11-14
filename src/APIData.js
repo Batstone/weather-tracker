@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Weather from './Weather.js'
 import HourlyForecast from './HourlyForecast.js'
 import DailyForecast from './DailyForecast.js'
-
+import moment from 'moment';
 
 const ApiData = (props) => {
 
@@ -58,7 +58,7 @@ const ApiData = (props) => {
 
         if (tempFormat !== 'F') {
             const celciusConversion = (temp - 273.15).toFixed(0)
-            const celcius = celciusConversion.toString() + ' ' + '°C'
+            const celcius = celciusConversion.toString() + ' ' + '℃'
             return celcius
 
         } else {
@@ -73,9 +73,15 @@ const ApiData = (props) => {
         updateTempFormat(value)
     }
 
+    const date = moment().format('ddd MMM Do, YYYY h:mm A');
+
     return (
         <div>
-            <h2>{search}</h2>
+            <div>
+                <h2>{search}</h2>
+                <h3>{date}</h3>
+            </div>
+
             <div>
                 <button onClick={(e) => update(e, 'F')}>℉</button>
                 <button onClick={(e) => update(e, 'C')}>°C</button>
