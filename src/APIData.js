@@ -15,6 +15,10 @@ const ApiData = (props) => {
 
     useEffect(() => {
 
+        updateWeatherData(null)
+        updateHourlyData(null)
+        updateDailyData(null)
+
         updateSearch(props.searchText)
 
         const key1 = '04d384a1bafb46ecaeb07b4ab49c647c'
