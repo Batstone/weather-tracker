@@ -6,9 +6,10 @@ const Weather = (props) => {
     const temp = props.temp
 
     return (
-        <div>
-            <div>
-                <h2>Current Weather</h2>
+        <div className="current-weather-container">
+            <div className="current-weather-title">
+                <h4>Current
+                Weather</h4>
             </div>
             <div>
                 <div>
@@ -23,7 +24,6 @@ const Weather = (props) => {
                     </ul>
                 </div>
             </div>
-
         </div>
     )
 }

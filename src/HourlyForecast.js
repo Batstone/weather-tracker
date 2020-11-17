@@ -9,7 +9,7 @@ const HourlyForecast = (props) => {
     console.log(hourly)
 
     return (
-        <div>
+        <div className="hourly-container">
             <div>
                 <h2>Hourly Forecast</h2>
             </div>
@@ -17,14 +17,14 @@ const HourlyForecast = (props) => {
                 {hourly.map((hour) => {
                     const time = moment.unix(hour.dt).format('h A');
                     return (
-                        <div key={hour.dt}>
+                        <div key={hour.dt} className="grid-item">
                             <div>
                                 <img src={`http://openweathermap.org/img/wn/${hour.weather[0].icon}@2x.png`}></img>
                             </div>
                             <ul>
                                 <li>{time}</li>
-                                <li>Temp: {temp(hour.temp)}</li>
-                                <li>Feels like: {temp(hour.feels_like)}</li>
+                                <li><span>Temp: </span>{temp(hour.temp)}</li>
+                                <li><span>Feels like: </span>{temp(hour.feels_like)}</li>
                                 <li>{hour.weather[0].description}</li>
                             </ul>
                         </div>
