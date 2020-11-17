@@ -23,6 +23,7 @@ const ApiData = (props) => {
 
         const key1 = '04d384a1bafb46ecaeb07b4ab49c647c'
 
+        // API for getting users coordinates
         fetch(`https://api.opencagedata.com/geocode/v1/json?q=${search}&key=${key1}`)
             .then(res => res.json())
             .then((data) => {
@@ -39,10 +40,12 @@ const ApiData = (props) => {
 
     useEffect(() => {
 
+
         if (locationCoordinates) {
 
             const key2 = 'b259026e161c31f0587ed82e488b63f5'
 
+            // Using the coordinates data to search for a specific city/location
             fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${locationCoordinates.lat.toFixed(6)}&lon=${locationCoordinates.lng.toFixed(6)}&exclude={part}&appid=${key2}`)
                 .then(res => res.json())
                 .then((data) => {
@@ -58,6 +61,7 @@ const ApiData = (props) => {
     }, [locationCoordinates])
 
 
+    // Function for converting themperature from F <-> C
     const tempConverter = (temp) => {
 
         if (tempFormat !== 'F') {
@@ -77,13 +81,10 @@ const ApiData = (props) => {
         updateTempFormat(value)
     }
 
-    const date = moment().format('ddd MMM Do, YYYY h:mm A');
-
     return (
         <div>
             <div>
                 <h2>{search}</h2>
-                <h3>{date}</h3>
             </div>
 
             <div>
@@ -96,6 +97,5 @@ const ApiData = (props) => {
         </div>
     )
 }
-
 
 export default ApiData

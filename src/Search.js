@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import APIData from './APIData.js'
 
+// Search form that takes user input as query to API call
 const Search = () => {
     const [search, setSearch] = useState('')
 
@@ -16,13 +17,18 @@ const Search = () => {
     }
 
     return (
-        <div>
-            <form onSubmit={formSubmit}>
-                <input type='text' name='text'></input>
-                <button>Search</button>
+        <section>
+            <div className="wrapper">
+                <div className="search-container">
+                    <form onSubmit={formSubmit}>
+                        <label>Search for your location.</label>
+                        <input type='text' name='text' placeholder="Enter a location"></input>
+                        <button>Search</button>
+                    </form>
+                </div>
                 {search !== '' && <APIData searchText={search} />}
-            </form>
-        </div>
+            </div>
+        </section>
     )
 }
 

@@ -1,13 +1,16 @@
 import React from 'react';
 import './App.css';
+import Header from './Header.js'
 import Search from './Search.js';
+import Footer from './Footer.js'
 
 const App = () => {
 
   return (
-    <div>
-      <h1>Weather App</h1>
+    <div className="main-container">
+      <Header />
       <Search />
+      <Footer />
     </div>
   );
 }

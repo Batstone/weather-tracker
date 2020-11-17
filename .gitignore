@@ -21,3 +21,13 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+/*
+list
+
+- Add alt text on images. Through API data?
+
+STYLES
+- responsive text format. clamp?
+- set wrapper on all elements
+*/
