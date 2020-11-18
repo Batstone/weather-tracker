@@ -83,15 +83,11 @@ const ApiData = (props) => {
 
     return (
         <div>
-            <div>
-                <h2>{search}</h2>
-            </div>
-
-            <div>
+            <div className="temp-buttons">
                 <button onClick={(e) => update(e, 'F')}>℉</button>
                 <button onClick={(e) => update(e, 'C')}>°C</button>
             </div>
-            {weatherData && <Weather weather={weatherData} temp={tempConverter} />}
+            {weatherData && <Weather weather={weatherData} temp={tempConverter} location={search} />}
             {hourlyData && <HourlyForecast hourlyForecast={hourlyData} temp={tempConverter} />}
             {dailyData && <DailyForecast dailyForecast={dailyData} temp={tempConverter} />}
         </div>
