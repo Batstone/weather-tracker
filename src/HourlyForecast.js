@@ -9,11 +9,11 @@ const HourlyForecast = (props) => {
     console.log(hourly)
 
     return (
-        <div className="hourly-container">
+        <div className="weather-container">
             <div>
                 <h2>Hourly Forecast</h2>
             </div>
-            <div className="hourly-grid">
+            <div className="weather-grid">
                 {hourly.map((hour) => {
                     const time = moment.unix(hour.dt).format('h A');
                     return (
