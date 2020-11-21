@@ -6,8 +6,6 @@ const Weather = (props) => {
 
     const temp = props.temp
 
-    console.log(props.weather)
-
     const mapCoordinates = {
         lat: props.weather.lat,
         lon: props.weather.lon

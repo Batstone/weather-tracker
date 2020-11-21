@@ -6,7 +6,6 @@ const HourlyForecast = (props) => {
     const hourly = props.hourlyForecast.slice(0, 23)
     const temp = props.temp
 
-    console.log(hourly)
 
     return (
         <div className="weather-container">

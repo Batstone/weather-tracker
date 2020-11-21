@@ -13,49 +13,44 @@ const ApiData = (props) => {
     const [dailyData, updateDailyData] = useState(null)
     const [tempFormat, updateTempFormat] = useState('F')
 
+
     useEffect(() => {
 
         updateWeatherData(null)
         updateHourlyData(null)
         updateDailyData(null)
 
-        updateSearch(props.searchText)
-
         const key1 = '04d384a1bafb46ecaeb07b4ab49c647c'
 
         // API for getting users coordinates
-        fetch(`https://api.opencagedata.com/geocode/v1/json?q=${search}&key=${key1}`)
-            .then(res => res.json())
-            .then((data) => {
+        const getCoordinatesData = async () => {
+            const call = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${search}&key=${key1}`)
+            const res = await call.json()
+            console.log(res)
+        }
 
-                const geometry = data.results[0].geometry
+        getCoordinatesData()
 
-                console.log(geometry)
-
-                updateLocationCoordinates(geometry)
-            })
-            .catch(err => console.log('something is not right with the Coordinates component')
-            )
     }, [props.searchText])
 
     useEffect(() => {
 
+        const key2 = 'b259026e161c31f0587ed82e488b63f5'
 
         if (locationCoordinates) {
 
-            const key2 = 'b259026e161c31f0587ed82e488b63f5'
-
             // Using the coordinates data to search for a specific city/location
-            fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${locationCoordinates.lat.toFixed(6)}&lon=${locationCoordinates.lng.toFixed(6)}&exclude={part}&appid=${key2}`)
-                .then(res => res.json())
-                .then((data) => {
+            const getLocationData = async () => {
+                const call = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${locationCoordinates.lat.toFixed(6)}&lon=${locationCoordinates.lng.toFixed(6)}&exclude={part}&appid=${key2}`)
+                const res = await call.json()
 
-                    console.log(data)
+                updateWeatherData(res)
+                updateHourlyData(res.hourly)
+                updateDailyData(res.daily)
+            }
 
-                    updateWeatherData(data)
-                    updateHourlyData(data.hourly)
-                    updateDailyData(data.daily)
-                })
+            getLocationData()
+
         }
 
     }, [locationCoordinates])
@@ -68,7 +63,6 @@ const ApiData = (props) => {
             const celciusConversion = (temp - 273.15).toFixed(0)
             const celcius = celciusConversion.toString() + ' ' + '℃'
             return celcius
-
         } else {
             const farenheitConversion = (((temp - 273.15) * 1.8) + 32).toFixed(0)
             const farenheit = farenheitConversion.toString() + ' ' + '℉ '

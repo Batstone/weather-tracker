@@ -7,8 +7,6 @@ const DailyForecast = (props) => {
     const daily = props.dailyForecast
     const temp = props.temp
 
-    console.log(daily)
-
     return (
         <div className="weather-container">
             <div>

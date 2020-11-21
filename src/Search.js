@@ -8,7 +8,7 @@ const Search = () => {
     const formSubmit = (e) => {
         e.preventDefault()
 
-        setSearch('')
+        setSearch(null)
 
         const text = e.target.elements.text.value
         setSearch(text)
