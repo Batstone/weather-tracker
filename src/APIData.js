@@ -13,8 +13,14 @@ const ApiData = (props) => {
     const [dailyData, updateDailyData] = useState(null)
     const [tempFormat, updateTempFormat] = useState('F')
 
+    useEffect(() => {
+        updateSearch(props.searchText)
+    }, [props.searchText])
 
     useEffect(() => {
+
+        console.log(search)
+        console.log(props.searchText)
 
         updateWeatherData(null)
         updateHourlyData(null)
@@ -27,32 +33,34 @@ const ApiData = (props) => {
             const call = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${search}&key=${key1}`)
             const res = await call.json()
             console.log(res)
+            updateLocationCoordinates(res.results[0].geometry)
         }
 
         getCoordinatesData()
 
-    }, [props.searchText])
+    }, [search])
 
     useEffect(() => {
 
+        console.log(search)
+        console.log(props.searchText)
+
         const key2 = 'b259026e161c31f0587ed82e488b63f5'
 
-        if (locationCoordinates) {
+        // Using the coordinates data to search for a specific city/location
+        const getLocationData = async () => {
 
-            // Using the coordinates data to search for a specific city/location
-            const getLocationData = async () => {
-                const call = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${locationCoordinates.lat.toFixed(6)}&lon=${locationCoordinates.lng.toFixed(6)}&exclude={part}&appid=${key2}`)
+            if (locationCoordinates) {
+
+                const call = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${locationCoordinates.lat}&lon=${locationCoordinates.lng}&exclude={part}&appid=${key2}`)
                 const res = await call.json()
 
                 updateWeatherData(res)
                 updateHourlyData(res.hourly)
                 updateDailyData(res.daily)
             }
-
-            getLocationData()
-
         }
-
+        getLocationData()
     }, [locationCoordinates])
 
 

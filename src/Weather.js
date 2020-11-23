@@ -11,7 +11,6 @@ const Weather = (props) => {
         lon: props.weather.lon
     }
 
-    console.log(mapCoordinates)
 
     return (
         <>
