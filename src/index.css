@@ -12,6 +12,11 @@ a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,c
 FONTS
 font-family: 'Lora', serif;
 font-family: 'Montserrat', sans-seif; 
+
+
+ICONS
+<i class="fas fa-minus"></i>
+<i class="fas fa-plus"></i>
 */
 
 body {
@@ -103,6 +108,10 @@ form button {
 
 /*  APIDATA COMPONENT  */
 
+.temp-buttons {
+  margin-top: 30px;
+}
+
 .temp-buttons button {
   border-radius: 50%;
   padding: 15px;
@@ -126,7 +135,7 @@ form button {
 
 .weather-map-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
   grid-gap: 20px;
   align-items: center;
 }
@@ -134,24 +143,23 @@ form button {
 .current-weather-container {
   background-color: #D9D9D9;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   border-radius: 2%;
   text-align: center;
   justify-items: center;
+  padding: 20px
 }
 
 .current-weather-title h4 {
-  writing-mode: vertical-rl;
-  text-orientation: sideways;
-  margin: 30px 0;
-  padding-right: 10px;
-  border-right: solid 5px rgb(209, 80, 28);
+  padding-bottom: 15px;
+  border-bottom: solid 5px rgb(209, 80, 28);
 }
 
 /*  MAP COMPONENT  */
 
-.map-container img {
+.map-container iframe {
   width: 100%;
+  height: 350px;
 }
 
 /* HOURLYFORECAST COMPONENT */
@@ -161,12 +169,29 @@ form button {
   flex-direction: column;
 }
 
-.weather-container h2 {
+.title-icon-container {
+  display: flex;
+  align-items: center;
+  margin: 30px 0;
+}
+
+.title-icon-container h2 {
+  border-bottom: solid 5px rgb(209, 80, 28);
+  padding-bottom: 10px;
+}
+
+.title-icon-container i {
+  margin-left: 50px;
+  font-size: 20px;
+}
+
+
+/* .weather-container h2 {
   display: inline-flex;
   margin: 30px 0;
   border-bottom: solid 5px rgb(209, 80, 28);
   padding-bottom: 10px;
-}
+} */
 
 .weather-grid {
   display: grid;

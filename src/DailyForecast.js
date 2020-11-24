@@ -1,19 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import moment from 'moment';
 
 
 const DailyForecast = (props) => {
+
+    const [icon, updateIcon] = useState(null)
+
+    const iconClick = () => {
+        if (!icon) {
+            updateIcon('clicked')
+        } else {
+            updateIcon(null)
+        }
+    }
 
     const daily = props.dailyForecast
     const temp = props.temp
 
     return (
         <div className="weather-container">
-            <div>
+            <div className="title-icon-container">
                 <h2>Daily Forecast</h2>
+                <i onClick={iconClick} className={icon ? "fas fa-minus" : "fas fa-plus"} />
             </div>
             <div className="weather-grid">
-                {daily.map((day) => {
+                {icon ? daily.map((day) => {
                     const time = moment.unix(day.dt).format('MMM DD');
                     return (
                         <div key={day.dt} className="grid-item">
@@ -22,13 +33,12 @@ const DailyForecast = (props) => {
                             </div>
                             <ul>
                                 <li>{time}</li>
-                                <li>Min temp: { }</li>
-                                <li>Max temp: {temp(day.temp.max)}</li>
+                                <li>{temp(day.temp.max)} <span>-</span> {temp(day.temp.min)}</li>
                                 <li>{day.weather[0].description}</li>
                             </ul>
                         </div>
                     )
-                })}
+                }) : null}
             </div>
 
         </div>

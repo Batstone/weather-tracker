@@ -11,6 +11,8 @@ const Weather = (props) => {
         lon: props.weather.lon
     }
 
+    console.log(props.weatherData)
+
 
     return (
         <>
@@ -28,9 +30,8 @@ const Weather = (props) => {
                         </div>
                         <div>
                             <ul>
-                                <li><span>Current temp: </span>{temp(props.weather.current.temp)} </li>
-                                <li><span>Feels like: </span>{temp(props.weather.current.feels_like)}</li>
-                                <li>{props.weather.current.weather[0].description}</li>
+                                <li>{temp(props.weather.current.temp)} <span>/</span> {temp(props.weather.current.feels_like)}</li>
+                                <li><span>{props.weather.current.weather[0].description}</span></li>
                             </ul>
                         </div>
                     </div>

@@ -58,6 +58,8 @@ const ApiData = (props) => {
                 updateWeatherData(res)
                 updateHourlyData(res.hourly)
                 updateDailyData(res.daily)
+
+                console.log(res)
             }
         }
         getLocationData()
