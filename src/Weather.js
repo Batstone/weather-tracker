@@ -3,7 +3,6 @@ import moment from 'moment';
 import Map from './Map.js'
 
 const Weather = (props) => {
-
     const temp = props.temp
 
     const mapCoordinates = {

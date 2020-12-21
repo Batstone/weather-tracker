@@ -186,6 +186,12 @@ form button {
 }
 
 
+/* Changing the color of the plus icon  */
+.fa-plus {
+  color: rgb(209, 80, 28);
+}
+
+
 /* .weather-container h2 {
   display: inline-flex;
   margin: 30px 0;

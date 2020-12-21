@@ -43,4 +43,4 @@ const HourlyForecast = (props) => {
     )
 }
 
-export default HourlyForecast
+export default HourlyForecast;

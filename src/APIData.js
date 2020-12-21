@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import Weather from './Weather.js'
-import HourlyForecast from './HourlyForecast.js'
-import DailyForecast from './DailyForecast.js'
-import moment from 'moment';
+import SearchModal from './SearchModal';
+import Weather from './Weather.js';
+import HourlyForecast from './HourlyForecast.js';
+import DailyForecast from './DailyForecast.js';
 
 const ApiData = (props) => {
 
     const [search, updateSearch] = useState(props.searchText)
+    const [locationOptions, updateLocationOptions] = useState(null)
     const [locationCoordinates, updateLocationCoordinates] = useState(null)
     const [weatherData, updateWeatherData] = useState(null)
     const [hourlyData, updateHourlyData] = useState(null)
@@ -18,10 +19,6 @@ const ApiData = (props) => {
     }, [props.searchText])
 
     useEffect(() => {
-
-        console.log(search)
-        console.log(props.searchText)
-
         updateWeatherData(null)
         updateHourlyData(null)
         updateDailyData(null)
@@ -33,12 +30,19 @@ const ApiData = (props) => {
             const call = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${search}&key=${key1}`)
             const res = await call.json()
             console.log(res)
-            updateLocationCoordinates(res.results[0].geometry)
+            updateLocationOptions(res.results)
+
         }
 
         getCoordinatesData()
-
     }, [search])
+
+
+    const locationSelection = (location) => {
+        updateLocationCoordinates(location)
+    }
+
+    console.log(locationOptions)
 
     useEffect(() => {
 
@@ -65,7 +69,6 @@ const ApiData = (props) => {
         getLocationData()
     }, [locationCoordinates])
 
-
     // Function for converting themperature from F <-> C
     const tempConverter = (temp) => {
 
@@ -91,6 +94,7 @@ const ApiData = (props) => {
                 <button onClick={(e) => update(e, 'F')}>℉</button>
                 <button onClick={(e) => update(e, 'C')}>°C</button>
             </div>
+            {locationOptions && <SearchModal searchOptions={locationOptions} locationSelector={locationSelection} />}
             {weatherData && <Weather weather={weatherData} temp={tempConverter} location={search} />}
             {hourlyData && <HourlyForecast hourlyForecast={hourlyData} temp={tempConverter} />}
             {dailyData && <DailyForecast dailyForecast={dailyData} temp={tempConverter} />}
