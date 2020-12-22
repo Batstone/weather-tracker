@@ -9,6 +9,7 @@ const ApiData = (props) => {
     const [search, updateSearch] = useState(props.searchText)
     const [locationOptions, updateLocationOptions] = useState(null)
     const [locationCoordinates, updateLocationCoordinates] = useState(null)
+    const [location, updateLocation] = useState(null)
     const [weatherData, updateWeatherData] = useState(null)
     const [hourlyData, updateHourlyData] = useState(null)
     const [dailyData, updateDailyData] = useState(null)
@@ -31,15 +32,16 @@ const ApiData = (props) => {
             const res = await call.json()
             console.log(res)
             updateLocationOptions(res.results)
-
         }
 
         getCoordinatesData()
     }, [search])
 
-
+    // This function is passed to the SearchModal as a prop
     const locationSelection = (location) => {
-        updateLocationCoordinates(location)
+        updateLocationCoordinates(location.geometry)
+        updateLocation(location.formatted)
+
     }
 
     console.log(locationOptions)
@@ -95,7 +97,7 @@ const ApiData = (props) => {
                 <button onClick={(e) => update(e, 'C')}>°C</button>
             </div>
             {locationOptions && <SearchModal searchOptions={locationOptions} locationSelector={locationSelection} />}
-            {weatherData && <Weather weather={weatherData} temp={tempConverter} location={search} />}
+            {weatherData && <Weather weather={weatherData} temp={tempConverter} location={location} />}
             {hourlyData && <HourlyForecast hourlyForecast={hourlyData} temp={tempConverter} />}
             {dailyData && <DailyForecast dailyForecast={dailyData} temp={tempConverter} />}
         </div>
