@@ -100,11 +100,11 @@ const ApiData = (props) => {
     return (
         <div>
             {locationOptions && <SearchModal searchOptions={locationOptions} locationSelector={locationSelection} />}
-            {weatherData && <Weather weather={weatherData} temp={tempConverter} location={location} />}
             <div className="temp-buttons">
                 <button onClick={(e) => update(e, 'F')}>℉</button>
                 <button onClick={(e) => update(e, 'C')}>°C</button>
             </div>
+            {weatherData && <Weather weather={weatherData} temp={tempConverter} location={location} />}
             {hourlyData && <HourlyForecast hourlyForecast={hourlyData} temp={tempConverter} wind={windDirection} percipitation={percipitation} />}
             {dailyData && <DailyForecast dailyForecast={dailyData} temp={tempConverter} wind={windDirection} percipitation={percipitation} />}
         </div>

@@ -27,18 +27,26 @@ const Search = () => {
     }
 
     return (
-        <section className="search">
-            <div className="wrapper">
+        <>
+            <section className="search">
                 <div className="search-container">
-                    <form onSubmit={formSubmit}>
-                        <label>Search for your location.</label>
-                        <input type='text' name='text' placeholder="Enter a location" onChange={onInputChange}></input>
-                        <button>Search</button>
-                    </form>
+                    <div className="wrapper">
+                        <form onSubmit={formSubmit}>
+                            <label className="s">Search for your location.</label>
+                            <input type='text' name='text' placeholder="Enter a location" onChange={onInputChange}></input>
+                            <button>Search</button>
+                        </form>
+                    </div>
                 </div>
-                {search !== '' && <APIData searchText={search} />}
-            </div>
-        </section>
+            </section>
+            <section className="search-data">
+                <div className="wrapper">
+                    {search !== '' && <APIData searchText={search} />}
+                </div>
+            </section>
+        </>
+
+
     )
 }
 
