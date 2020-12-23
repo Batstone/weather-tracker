@@ -41,10 +41,7 @@ const ApiData = (props) => {
     const locationSelection = (location) => {
         updateLocationCoordinates(location.geometry)
         updateLocation(location.formatted)
-
     }
-
-    console.log(locationOptions)
 
     useEffect(() => {
         console.log(search)
@@ -82,27 +79,34 @@ const ApiData = (props) => {
         }
     }
 
+    // Updating the selected Temp format selection
+    const update = (e, value) => {
+        e.preventDefault()
+        updateTempFormat(value)
+    }
+
+    // Function for calculating wind direction and speed, passed as a prop to the Hourly and Daily weather components
     const windDirection = (wind) => {
         var val = Math.floor((wind / 22.5) + 0.5);
         var arr = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
         return arr[(val % 16)];
     }
 
-    const update = (e, value) => {
-        e.preventDefault()
-        updateTempFormat(value)
+    // Function for setting percentage of percipitation, passed as a prop to the Hourly and Daily weather components
+    const percipitation = (pop) => {
+        return parseInt(pop * 100)
     }
 
     return (
         <div>
+            {locationOptions && <SearchModal searchOptions={locationOptions} locationSelector={locationSelection} />}
+            {weatherData && <Weather weather={weatherData} temp={tempConverter} location={location} />}
             <div className="temp-buttons">
                 <button onClick={(e) => update(e, 'F')}>℉</button>
                 <button onClick={(e) => update(e, 'C')}>°C</button>
             </div>
-            {locationOptions && <SearchModal searchOptions={locationOptions} locationSelector={locationSelection} />}
-            {weatherData && <Weather weather={weatherData} temp={tempConverter} location={location} />}
-            {hourlyData && <HourlyForecast hourlyForecast={hourlyData} temp={tempConverter} wind={windDirection} />}
-            {dailyData && <DailyForecast dailyForecast={dailyData} temp={tempConverter} wind={windDirection} />}
+            {hourlyData && <HourlyForecast hourlyForecast={hourlyData} temp={tempConverter} wind={windDirection} percipitation={percipitation} />}
+            {dailyData && <DailyForecast dailyForecast={dailyData} temp={tempConverter} wind={windDirection} percipitation={percipitation} />}
         </div>
     )
 }

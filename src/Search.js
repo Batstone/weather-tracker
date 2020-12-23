@@ -27,7 +27,7 @@ const Search = () => {
     }
 
     return (
-        <section>
+        <section className="search">
             <div className="wrapper">
                 <div className="search-container">
                     <form onSubmit={formSubmit}>
