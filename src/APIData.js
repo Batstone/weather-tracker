@@ -47,7 +47,6 @@ const ApiData = (props) => {
     console.log(locationOptions)
 
     useEffect(() => {
-
         console.log(search)
         console.log(props.searchText)
 
@@ -55,7 +54,6 @@ const ApiData = (props) => {
 
         // Using the coordinates data to search for a specific city/location
         const getLocationData = async () => {
-
             if (locationCoordinates) {
 
                 const call = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${locationCoordinates.lat}&lon=${locationCoordinates.lng}&exclude={part}&appid=${key2}`)
@@ -73,7 +71,6 @@ const ApiData = (props) => {
 
     // Function for converting themperature from F <-> C
     const tempConverter = (temp) => {
-
         if (tempFormat !== 'F') {
             const celciusConversion = (temp - 273.15).toFixed(0)
             const celcius = celciusConversion.toString() + ' ' + '℃'
@@ -83,6 +80,12 @@ const ApiData = (props) => {
             const farenheit = farenheitConversion.toString() + ' ' + '℉ '
             return farenheit
         }
+    }
+
+    const windDirection = (wind) => {
+        var val = Math.floor((wind / 22.5) + 0.5);
+        var arr = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
+        return arr[(val % 16)];
     }
 
     const update = (e, value) => {
@@ -98,8 +101,8 @@ const ApiData = (props) => {
             </div>
             {locationOptions && <SearchModal searchOptions={locationOptions} locationSelector={locationSelection} />}
             {weatherData && <Weather weather={weatherData} temp={tempConverter} location={location} />}
-            {hourlyData && <HourlyForecast hourlyForecast={hourlyData} temp={tempConverter} />}
-            {dailyData && <DailyForecast dailyForecast={dailyData} temp={tempConverter} />}
+            {hourlyData && <HourlyForecast hourlyForecast={hourlyData} temp={tempConverter} wind={windDirection} />}
+            {dailyData && <DailyForecast dailyForecast={dailyData} temp={tempConverter} wind={windDirection} />}
         </div>
     )
 }
