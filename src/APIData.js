@@ -11,9 +11,7 @@ const ApiData = (props) => {
     const [locationCoordinates, updateLocationCoordinates] = useState(null)
     const [location, updateLocation] = useState(null)
     const [weatherData, updateWeatherData] = useState(null)
-    const [hourlyData, updateHourlyData] = useState(null)
-    const [dailyData, updateDailyData] = useState(null)
-    const [tempFormat, updateTempFormat] = useState('F')
+
 
     useEffect(() => {
         updateSearch(props.searchText)
@@ -21,8 +19,6 @@ const ApiData = (props) => {
 
     useEffect(() => {
         updateWeatherData(null)
-        updateHourlyData(null)
-        updateDailyData(null)
 
         const key1 = '04d384a1bafb46ecaeb07b4ab49c647c'
 
@@ -57,56 +53,17 @@ const ApiData = (props) => {
                 const res = await call.json()
 
                 updateWeatherData(res)
-                updateHourlyData(res.hourly)
-                updateDailyData(res.daily)
-
                 console.log(res)
             }
         }
         getLocationData()
     }, [locationCoordinates])
 
-    // Function for converting themperature from F <-> C
-    const tempConverter = (temp) => {
-        if (tempFormat !== 'F') {
-            const celciusConversion = (temp - 273.15).toFixed(0)
-            const celcius = celciusConversion.toString() + ' ' + '℃'
-            return celcius
-        } else {
-            const farenheitConversion = (((temp - 273.15) * 1.8) + 32).toFixed(0)
-            const farenheit = farenheitConversion.toString() + ' ' + '℉ '
-            return farenheit
-        }
-    }
-
-    // Updating the selected Temp format selection
-    const update = (e, value) => {
-        e.preventDefault()
-        updateTempFormat(value)
-    }
-
-    // Function for calculating wind direction and speed, passed as a prop to the Hourly and Daily weather components
-    const windDirection = (wind) => {
-        var val = Math.floor((wind / 22.5) + 0.5);
-        var arr = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
-        return arr[(val % 16)];
-    }
-
-    // Function for setting percentage of percipitation, passed as a prop to the Hourly and Daily weather components
-    const percipitation = (pop) => {
-        return parseInt(pop * 100)
-    }
 
     return (
         <div>
             {locationOptions && <SearchModal searchOptions={locationOptions} locationSelector={locationSelection} />}
-            <div className="temp-buttons">
-                <button onClick={(e) => update(e, 'F')}>℉</button>
-                <button onClick={(e) => update(e, 'C')}>°C</button>
-            </div>
-            {weatherData && <Weather weather={weatherData} temp={tempConverter} location={location} />}
-            {hourlyData && <HourlyForecast hourlyForecast={hourlyData} temp={tempConverter} wind={windDirection} percipitation={percipitation} />}
-            {dailyData && <DailyForecast dailyForecast={dailyData} temp={tempConverter} wind={windDirection} percipitation={percipitation} />}
+            {weatherData && <Weather weather={weatherData} location={location} />}
         </div>
     )
 }
