@@ -32,7 +32,7 @@ const Search = () => {
                 <div className="search-container">
                     <div className="wrapper">
                         <form onSubmit={formSubmit}>
-                            <label className="s">Search for your location.</label>
+                            <label className="sr-only">Search for your location.</label>
                             <input type='text' name='text' placeholder="Enter a location" onChange={onInputChange}></input>
                             <button>Search</button>
                         </form>

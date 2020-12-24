@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import moment from 'moment';
+import React, { useState } from 'react';
 import HourlyForecast from './HourlyForecast';
 import DailyForecast from './DailyForecast.js';
 
@@ -48,41 +47,35 @@ const Weather = (props) => {
         return arr[(val % 16)];
     }
 
-    console.log(current)
-
     return (
         <>
             <div className="search-location">
                 <h2>{props.location}</h2>
-            </div>
-            <div className="weather-map-container">
-                <div>
-                    <div className="current-weather-title">
-                        <div className="temp-buttons">
-                            <button onClick={(e) => update(e, 'F')}>℉</button>
-                            <button onClick={(e) => update(e, 'C')}>°C</button>
-                        </div>
-                    </div>
-                    <div>
-                        <div className="current-weather">
-                            <ul className="current-weather__container-1">
-                                <li className="current-weather__container-1__img">
-                                    <img src={`http://openweathermap.org/img/wn/${props.weather.current.weather[0].icon}@2x.png`}></img>
-                                </li>
-                                <li>{tempConverter(current.temp)}</li>
-                                <li>Feels Like: {tempConverter(current.feels_like)}</li>
-                                <li>{current.weather[0].description}</li>
-                                <li>{windDirection(current.wind_deg)}</li>
-                                <li>{current.wind_deg}</li>
-                            </ul>
-                        </div>
-
-                        {<HourlyForecast hourlyForecast={hourly} temp={tempConverter} wind={windDirection} percipitation={percipitation} />}
-                        {<DailyForecast dailyForecast={daily} temp={tempConverter} wind={windDirection} percipitation={percipitation} />}
-
-                    </div>
+                <div className="temp-buttons">
+                    <button onClick={(e) => update(e, 'F')}>℉</button>
+                    <button onClick={(e) => update(e, 'C')}>°C</button>
                 </div>
             </div>
+
+            <div>
+                <div className="current-weather">
+                    <ul className="current-weather__container-1">
+                        <li className="current-weather__container-1__temp">{tempConverter(current.temp)}</li>
+                        <li>Feels Like: {tempConverter(current.feels_like)}</li>
+                        <li className="current-weather__container-1__img">
+                            <img src={`http://openweathermap.org/img/wn/${props.weather.current.weather[0].icon}@2x.png`}></img>
+                        </li>
+
+                        <li className="current-weather__container-1__description">{current.weather[0].description}</li>
+                        <li>{windDirection(current.wind_deg)}</li>
+                        <li>{current.wind_speed} MPH</li>
+                    </ul>
+                </div>
+
+                {<HourlyForecast hourlyForecast={hourly} temp={tempConverter} wind={windDirection} percipitation={percipitation} />}
+                {<DailyForecast dailyForecast={daily} temp={tempConverter} wind={windDirection} percipitation={percipitation} />}
+            </div>
+
         </>
     )
 }

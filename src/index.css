@@ -81,15 +81,27 @@ form {
 
 form input {
   width: 300px;
+  padding: 10px 0;
+  margin-bottom: 10px;
 }
 
 form button {
   width: 300px;
+  background-color: white;
+  border: none;
+  color:rgb(209, 80, 28);
+  padding: 10px 0;
+  font-size: 16px;
 }
 
 /*  APIDATA COMPONENT  */
 
 .temp-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.temp-buttons__container {
   display: inline-block;
   margin-top: 30px;
 }
@@ -108,8 +120,14 @@ form button {
 
 .search-location {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   margin: 10px 0 50px 0;
+  color: white;
+}
+
+.search-location h2 {
+  margin-bottom: 25px;
 }
 
 /*  WEATHER COMPONENT  */
@@ -128,6 +146,7 @@ form button {
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 }
 
 .current-weather__container-1:before {
@@ -142,6 +161,13 @@ form button {
   filter: blur(2px)
 }
 
+.current-weather__container-1 li {
+  margin-bottom: 15px;
+}
+
+.current-weather__container-1__temp {
+  font-size: 50px
+}
 
 .current-weather__container-1__img {
     width: 25%;
