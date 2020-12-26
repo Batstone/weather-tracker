@@ -30,7 +30,7 @@ body {
 }
 
 h1 {
-  font-size: clamp(1.75rem, 3.5vw, 2.9rem);
+  font-size: clamp(2rem, 3.5vw, 2.9rem);
   font-weight: bold;
 }
 
@@ -81,6 +81,7 @@ form {
   align-items: center;
   padding-bottom: 25px;
   border-radius: 5px;
+  margin-top: 25px;
 }
 
 form input {
@@ -253,12 +254,6 @@ form input {
   font-size: 20px;
 }
 
-
-/* Changing the color of the plus icon  */
-.fa-plus {
-  color: rgb(209, 80, 28);
-}
-
 .fa-tint {
   color: rgb(33, 33, 216);
 }
@@ -374,7 +369,7 @@ footer {
 
 footer a {
   color:rgb(209, 80, 28);
-  text-decoration: none;;
+  text-decoration: none;
 }
 
 .footer-container {
@@ -398,8 +393,37 @@ footer a {
 
 @media (max-width: 530px) {
 
+  .current-weather {
+    margin-bottom: 25px;
+  }
+
+  .current-weather__container-1:before {
+    left: 20%;
+    right: 20%;
+    top: -10%; 
+    bottom: -10%;
+  }
+
 }
 
-@media (max-width: 430px) {
+@media (max-width: 490px) {
   
+  .header-container {
+    flex-direction: column;
+  }
+
+  .header-container h1 {
+    margin-bottom: 6px;
+  }
+
+}
+
+@media (max-width: 360px) {
+
+  .current-weather__container-1:before {
+    left: 10%;
+    right: 10%;
+    top: -10%; 
+    bottom: -10%;
+  }
 }
