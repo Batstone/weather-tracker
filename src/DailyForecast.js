@@ -34,7 +34,7 @@ const DailyForecast = (props) => {
                         <li key={day.dt} className="weather__details">
                             <div className="weather__details__container-1">
                                 <div>{time}</div>
-                                <div>
+                                <div className="weather__details__temp-container">
                                     <div>Max:{temp(day.temp.max)}</div>
                                     <div>Min: {temp(day.temp.min)}</div>
                                 </div>

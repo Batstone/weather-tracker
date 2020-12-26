@@ -7,11 +7,14 @@ import Footer from './Footer.js'
 const App = () => {
 
   return (
-    <div className="main-container">
-      <Header />
-      <Search />
+    <>
+      <div className="main-container">
+        <Header />
+        <Search />
+      </div>
       <Footer />
-    </div>
+    </>
+
   );
 }
 

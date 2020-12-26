@@ -34,7 +34,7 @@ const HourlyForecast = (props) => {
                         <li key={hour.dt} className="weather__details">
                             <div className="weather__details__container-1">
                                 <div>{time}</div>
-                                <div>
+                                <div className="weather__details__temp-container">
                                     <div>{temp(hour.temp)}</div>
                                     <div>FL: {temp(hour.feels_like)}</div>
                                 </div>
