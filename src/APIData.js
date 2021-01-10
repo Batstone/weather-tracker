@@ -12,7 +12,6 @@ const ApiData = (props) => {
     const [location, updateLocation] = useState(null)
     const [weatherData, updateWeatherData] = useState(null)
 
-
     useEffect(() => {
         updateSearch(props.searchText)
     }, [props.searchText])
@@ -25,9 +24,13 @@ const ApiData = (props) => {
         // API for getting users coordinates
         const getCoordinatesData = async () => {
             const call = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${search}&key=${key1}`)
-            const res = await call.json()
-            console.log(res)
-            updateLocationOptions(res.results)
+
+            if (call.status === 200) {
+                const res = await call.json()
+                updateLocationOptions(res.results)
+            } else {
+                throw new Error('Unable to get Coordinates Data')
+            }
         }
 
         getCoordinatesData()
@@ -50,10 +53,12 @@ const ApiData = (props) => {
             if (locationCoordinates) {
 
                 const call = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${locationCoordinates.lat}&lon=${locationCoordinates.lng}&exclude={part}&appid=${key2}`)
-                const res = await call.json()
-
-                updateWeatherData(res)
-                console.log(res)
+                if (call.status === 200) {
+                    const res = await call.json()
+                    updateWeatherData(res)
+                } else {
+                    throw new Error('Unable to fetch location data')
+                }
             }
         }
         getLocationData()
